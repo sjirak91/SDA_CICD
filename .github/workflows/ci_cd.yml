@@ -1,0 +1,24 @@
+name: ML CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run data loading and model training
+        run: |
+          python data_loading.py
+          python model_training.py
